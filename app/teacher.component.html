@@ -1,0 +1,29 @@
+<h1>We have {{totalLessons()}} lessons in our platform</h1>
+  			<ul>
+		  		<li *ngFor="let teacher of teachers" [class.available]="teacher.available">
+		  			<div class="TeacherPictureDiv">
+		  				<!-- <img src="{{teacher.image}}"> -->
+		  				<img [src]="teacher.image" [alt]="teacher.description" class="ImageSizes">
+		  				</div>
+		  			<p class="TeacherName">{{teacher.name | uppercase}}</p>
+		  			<p class="TeacherAge">{{teacher.age}}</p>
+		  			<p class="TeacherPrice">{{teacher.price | currency: 'EUR':true}}</p>
+		  			<p>Ratings</p>
+		  			<div class="selectQuantity">
+		  				<p>Bulk Lesson Pacakages</p>
+		  				<button class="decrease" (click)="downQuantity(teacher)">-</button>
+		  				<input class="LessonPackages" type="text" [(ngModel)]="teacher.lessonPackages">
+		  				{{teacher.lessonPackages}}
+		  				<button class="increase" (click)="upQuantity(teacher)">+</button>
+						<button class="button" *ngIf="teacher.available" (click)="takeLessonTaken(teacher)">Take Lesson</button>
+						<div *ngIf="teacher.available">
+						<p class="status">Our teacher is available</p>
+						<button class="button-cancel" (click)="cancelRequest(teacher)">Cancel Race</button>
+						</div>
+		  				
+		  			</div>
+		  			<p *ngIf="teacher.rating > 0">{{teacher.rating}} / 100</p>
+		  			<p *ngIf="teacher.rating === 0"> hasn't voted yet!!!</p>
+		  		</li>
+		  			<input type="text" (keydown)="showKey($event)">
+  			</ul>
